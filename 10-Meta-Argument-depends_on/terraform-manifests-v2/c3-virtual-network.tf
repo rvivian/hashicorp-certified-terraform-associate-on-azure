@@ -25,7 +25,7 @@ resource "azurerm_public_ip" "mypublicip" {
   resource_group_name = azurerm_resource_group.myrg.name
   location            = azurerm_resource_group.myrg.location
   allocation_method   = "Static"
-  domain_name_label = "app1-vm-${random_string.myrandom.id}"
+  domain_name_label   = "app1-vm-${random_string.myrandom.id}"
   tags = {
     environment = "Dev"
   }
@@ -41,6 +41,6 @@ resource "azurerm_network_interface" "myvmnic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.mysubnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.mypublicip.id 
+    public_ip_address_id          = azurerm_public_ip.mypublicip.id
   }
 }
