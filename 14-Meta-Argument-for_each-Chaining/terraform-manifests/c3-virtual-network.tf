@@ -16,17 +16,17 @@ resource "azurerm_subnet" "mysubnet" {
 
 # Create Azure Public IP Address
 resource "azurerm_public_ip" "mypublicip" {
-  for_each = toset(["vm1", "vm2"])
+  for_each            = toset(["vm1", "vm2"])
   name                = "mypublicip-${each.key}"
   resource_group_name = azurerm_resource_group.myrg.name
   location            = azurerm_resource_group.myrg.location
   allocation_method   = "Static"
-  domain_name_label = "app1-${each.key}-${random_string.myrandom.id}"  
+  domain_name_label   = "app1-${each.key}-${random_string.myrandom.id}"
 }
 
 # Create Network Interface
 resource "azurerm_network_interface" "myvmnic" {
-  for_each = toset(["vm1", "vm2"])  
+  for_each            = toset(["vm1", "vm2"])
   name                = "vmnic-${each.key}"
   location            = azurerm_resource_group.myrg.location
   resource_group_name = azurerm_resource_group.myrg.name
@@ -35,6 +35,6 @@ resource "azurerm_network_interface" "myvmnic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.mysubnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.mypublicip[each.key].id
+    public_ip_address_id          = azurerm_public_ip.mypublicip[each.key].id
   }
 }

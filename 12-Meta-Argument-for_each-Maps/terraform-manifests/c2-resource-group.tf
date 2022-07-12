@@ -5,6 +5,6 @@ resource "azurerm_resource_group" "myrg" {
     dc2apps = "eastus2"
     dc3apps = "westus"
   }
-  name = "${each.key}-rg"
-  location = each.value 
+  name     = "${each.key}-rg"
+  location = each.value
 }
